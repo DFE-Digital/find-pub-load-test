@@ -22,187 +22,21 @@ test do
                       ignoreFirstLine: true,
                       quotedData: true
 
-  threads count: 1, loops: 1 do
+  threads count: THREAD_COUNT, rampup: RAMPUP, duration: 1800 do
     visit name: 'Start page', url: url('/') do
       extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
     end
 
-    visit name: 'Results page', url: url('/results?age_group=primary&l=2&subject_codes%5B%5D=00') do
+    visit name: 'Results page', url: url('/results?age_group=secondary&fulltime=false&hasvacancies=true&l=2&parttime=false&qualifications%5B%5D=QtsOnly&qualifications%5B%5D=PgdePgceWithQts&qualifications%5B%5D=Other&senCourses=false&subject_codes%5B%5D=W1&subject_codes%5B%5D=C1&subject_codes%5B%5D=08&subject_codes%5B%5D=F1&subject_codes%5B%5D=09&subject_codes%5B%5D=Q8&subject_codes%5B%5D=P3&subject_codes%5B%5D=11&subject_codes%5B%5D=12&subject_codes%5B%5D=DT&subject_codes%5B%5D=13&subject_codes%5B%5D=L1&subject_codes%5B%5D=Q3&subject_codes%5B%5D=16&subject_codes%5B%5D=15&subject_codes%5B%5D=F8&subject_codes%5B%5D=17&subject_codes%5B%5D=L5&subject_codes%5B%5D=V1&subject_codes%5B%5D=18&subject_codes%5B%5D=19&subject_codes%5B%5D=A0&subject_codes%5B%5D=20&subject_codes%5B%5D=G1&subject_codes%5B%5D=24&subject_codes%5B%5D=W3&subject_codes%5B%5D=C6&subject_codes%5B%5D=C7&subject_codes%5B%5D=F3&subject_codes%5B%5D=C8&subject_codes%5B%5D=V6&subject_codes%5B%5D=21&subject_codes%5B%5D=F0&subject_codes%5B%5D=14&subject_codes%5B%5D=22') do
       extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
     end
-    #
-    # submit!(
-    #   'Start page',
-    #   '/results/filter/location',
-    #   {
-    #     'authenticity_token' => '${authenticity_token}',
-    #     'prev_l': 'none',
-    #     'prev_loc': 'none',
-    #     'prev_lng': 'none',
-    #     'prev_lat': 'none',
-    #     'prev_rad': 'none',
-    #     'prev_query': 'none',
-    #     'prev_lq': 'none',
-    #     'lq': '',
-    #     'l': 3,
-    #     'query': '2Schools Consortium (T92)'
-    #   }
-    # ) do
-    #   extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
-    # end
-    #
-    # submit!(
-    #   'Age groups page',
-    #   '/age-groups-submit',
-    #   {
-    #     'authenticity_token' => '${authenticity_token}',
-    #     'search_age_groups_form[l]': 3,
-    #     'search_age_groups_form[query]': '2Schools Consortium',
-    #     'search_age_groups_form[age_group]': 'primary',
-    #   }
-    # ) do
-    #   extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
-    # end
-    #
-    # submit!(
-    #   'Subject page',
-    #   '/results/filter/subject',
-    #   {
-    #     'utf8': '✓',
-    #     'authenticity_token' => '${authenticity_token}',
-    #     'c': '${C}',
-    #     'l': '${L}',
-    #     'lat': '${LAT}',
-    #     'lng': '${LNG}',
-    #     'loc': '${LOC}',
-    #     'lq': '${LQ}',
-    #     'rad': '${RAD}',
-    #     'sortby': '${SORT_BY}',
-    #     'subject_codes[]': ['${SUBJECT_CODES_1}', '${SUBJECT_CODES_2}', '${SUBJECT_CODES_3}', '${SUBJECT_CODES_4}', '${SUBJECT_CODES_5}', '${SUBJECT_CODES_6}'].compact,
-    #     'page': '${PAGE}',
-    #     'senCourses': '${SEN_COURSES}',
-    #     'qualifications': '${QUALIFICATIONS}',
-    #     'fulltime': '${FULLTIME}',
-    #     'parttime': '${PARTTIME}',
-    #     'degree_required': '${DEGREE_REQUIRED}',
-    #     'hasvacancies': '${HAS_VACANCIES}',
-    #     'query': '${QUERY}',
-    #     'funding': '${FUNDING}'
-    #   },
-    # ) do
-    #   extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
-    #   extract name: 'course_page', regex: 'data-qa="course__link" class="govuk-link" href="(.+)"'
-    # end
-    #
-    # visit name: 'Course page, via postcode search', url: url('/${course_page}')
 
-    # visit name: 'Start page', url: url('/') do
-    #   extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
-    # end
-    #
-    # submit!(
-    #   'Start page',
-    #   '/results/filter/location',
-    #   {
-    #     'utf8': '✓',
-    #     'authenticity_token' => '${authenticity_token}',
-    #     'prev_l': 'none',
-    #     'prev_loc': 'none',
-    #     'prev_lng': 'none',
-    #     'prev_lat': 'none',
-    #     'prev_rad': 'none',
-    #     'prev_query': 'none',
-    #     'prev_lq': 'none',
-    #     'l': '${L}',
-    #     'loc': '${LOC}',
-    #     'lng': '${LNG}',
-    #     'lat': '${LAT}',
-    #     'query': '${QUERY}',
-    #     'lq': '${LQ}',
-    #     'subject_codes[]': ['${SUBJECT_CODES_1}', '${SUBJECT_CODES_2}', '${SUBJECT_CODES_3}', '${SUBJECT_CODES_4}', '${SUBJECT_CODES_5}', '${SUBJECT_CODES_6}'].compact,
-    #     'qualifications': '${QUALIFICATIONS}',
-    #     'c': '${C}',
-    #     'senCourses': '${SEN_COURSES}',
-    #     'degree_required': '${DEGREE_REQUIRED}',
-    #     'fulltime': '${FULLTIME}',
-    #     'parttime': '${PARTTIME}',
-    #     'funding': '${FUNDING}',
-    #     'page': '${PAGE}',
-    #     'sortby': '${SORT_BY}'
-    #   }
-    # ) do
-    #   extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
-    # end
-    #
-    # submit!(
-    #   'Subject page',
-    #   '/results/filter/subject',
-    #   {
-    #     'utf8': '✓',
-    #     'authenticity_token' => '${authenticity_token}',
-    #     'c': '${C}',
-    #     'l': '${L}',
-    #     'lat': '${LAT}',
-    #     'lng': '${LNG}',
-    #     'loc': '${LOC}',
-    #     'lq': '${LQ}',
-    #     'rad': '${RAD}',
-    #     'sortby': '${SORT_BY}',
-    #     'subject_codes[]': ['${SUBJECT_CODES_1}', '${SUBJECT_CODES_2}', '${SUBJECT_CODES_3}', '${SUBJECT_CODES_4}', '${SUBJECT_CODES_5}', '${SUBJECT_CODES_6}'].compact,
-    #     'page': '${PAGE}',
-    #     'senCourses': '${SEN_COURSES}',
-    #     'qualifications': '${QUALIFICATIONS}',
-    #     'fulltime': '${FULLTIME}',
-    #     'parttime': '${PARTTIME}',
-    #     'degree_required': '${DEGREE_REQUIRED}',
-    #     'hasvacancies': '${HAS_VACANCIES}',
-    #     'query': '${QUERY}',
-    #     'funding': '${FUNDING}'
-    #   }
-    # ) do
-    #   extract name: 'course_page', regex: 'data-qa="course__link" class="govuk-link" href="(.+)"'
-    # end
-    #
-    # visit name: 'Course page, via England search', url: url('/${course_page}')
-    #
-    # visit name: 'Start page', url: url('/') do
-    #   extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
-    # end
-    #
-    # submit!(
-    #   'Start page',
-    #   '/results/filter/location',
-    #   {
-    #     'utf8': '✓',
-    #     'authenticity_token' => '${authenticity_token}',
-    #     'prev_l': 'none',
-    #     'prev_loc': 'none',
-    #     'prev_lng': 'none',
-    #     'prev_lat': 'none',
-    #     'prev_rad': 'none',
-    #     'prev_query': 'none',
-    #     'prev_lq': 'none',
-    #     'l': '${L}',
-    #     'loc': '${LOC}',
-    #     'lng': '${LNG}',
-    #     'lat': '${LAT}',
-    #     'query': '${QUERY}',
-    #     'lq': '${LQ}',
-    #     'subject_codes[]': ['${SUBJECT_CODES_1}', '${SUBJECT_CODES_2}', '${SUBJECT_CODES_3}', '${SUBJECT_CODES_4}', '${SUBJECT_CODES_5}', '${SUBJECT_CODES_6}'].compact,
-    #     'qualifications': '${QUALIFICATIONS}',
-    #     'c': '${C}',
-    #     'senCourses': '${SEN_COURSES}',
-    #     'degree_required': '${DEGREE_REQUIRED}',
-    #     'fulltime': '${FULLTIME}',
-    #     'parttime': '${PARTTIME}',
-    #     'funding': '${FUNDING}',
-    #     'page': '${PAGE}',
-    #     'sortby': '${SORT_BY}'
-    #   }
-    # ) do
-    #   extract name: 'course_page', regex: 'data-qa="course__link" class="govuk-link" href="(.+)"'
-    # end
-    #
-    # visit name: 'Course page, via provider search', url: url('/${course_page}')
+    visit name: 'Course page', url: url('/course/2AT/2T84') do
+      extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
+    end
+
+    visit name: 'Accessibility', url: url('/accessibility') do
+      extract name: 'authenticity_token', regex: 'name="authenticity_token" value="(.+?)"'
+    end
   end
 end.jmx

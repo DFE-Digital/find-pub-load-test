@@ -10,6 +10,6 @@ variable "app_env_variables" {}
 
 locals {
   app_name          = var.app_name
-  docker_image      = "ghcr.io/dfe-digital/apply-jmeter-runner:latest"
+  docker_image      = "ghcr.io/dfe-digital/find-jmeter-runner:latest"
   app_env_variables = var.app_env_variables
 }

@@ -1,13 +1,4 @@
-IMAGE=ghcr.io/dfe-digital/apply-jmeter-runner:latest
-
-apply:
-	$(eval VAR_FILE=apply)
-
-manage:
-	$(eval VAR_FILE=manage)
-
-vendor:
-	$(eval VAR_FILE=vendor)
+IMAGE=ghcr.io/dfe-digital/find-jmeter-runner:latest
 
 find:
 	$(eval VAR_FILE=find)
